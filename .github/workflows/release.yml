@@ -26,6 +26,14 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     steps:
+      # 安装 Nix
+      - name: Setup Nix
+        uses: cachix/install-nix-action@v20
+
+      # 使用 Nix 构建 Clash Verge
+      - name: Build with Nix
+        run: nix-build --argstr system ${RUNNER_OS} -A clash-verge
+    
       - name: Checkout Repository
         uses: actions/checkout@v4
 
